@@ -16,25 +16,40 @@ const auth = require("./auth.json");
 client.auth=auth;
 client.points=points;
 
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function getImgPath(str,has_variations,pos) {
+    let ret= "./images/"
+    if(pos)
+        ret+="plus";
+    else
+        ret+="minus";
+    ret+=`${str}points`;
+    if(has_variations) {
+        if(getRandomIntInclusive(0,1) == 1)
+            ret+="1";
+    }
+    return ret+".png";
+}
+
 client.getpointimages = function(num) {
     let img = "";
+    let novariationpoints = [1,5,10,25,69,100,420,727,-1,-5,-10,-15,-25,-69,-100,-420,-727,-1000000];
+    let variationpoints = [15,50,-50];
     console.log(num);
-    switch(num) {
-    case 5:
-        img = "./images/plus5points.png";
-        break;
-    case 10:
-        img = "./images/plus10points.png";
-        break;
-    case 15:
-        img = "./images/plus15points.png";
-        break;
-    case -5:
-        img = "./images/minus5points.png";
-        break;
-    case -10:
-        img = "./images/minus10points.png";
-        break;
+    if(novariationpoints.indexOf(num) != -1) {
+        if(num>=0)
+            img = getImgPath(num,false,true);
+        else
+            img = getImgPath(Math.abs(num),false,false);
+    }
+    else if(variationpoints.indexOf(num) != -1) {
+        if(num>=0)
+            img = getImgPath(num,true,true);
+        else
+            img = getImgPath(Math.abs(num),true,false);
     }
     console.log(img);
     return img;

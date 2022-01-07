@@ -12,7 +12,7 @@ exports.run = (client, message, args) => {
         return;
     }
     else if (args[0] > client.points.getPoints(target.id)){
-       message.reply('You have too few acp,come back when you are a bit richer')
+       message.reply('You have too few acp, come back when you are a bit richer')
        return
     }
     else if(!args[1]) {
@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
        return
     }
     else {
-        client.points.add(message.author.id, 0-args[0]);
+        client.points.add(message.author.id, 0-parseInt(args[0]));
         let img = client.getpointimages(0-parseInt(args[0]));
         console.log(img);
         let s="s"
