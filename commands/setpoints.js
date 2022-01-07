@@ -9,7 +9,7 @@ exports.run = (client, message, args) => {
         return;
     }
     else if(!args[1]) {
-        client.points.add(message.author.id, args[0] - client.points.getPoints(message.author.id.id));
+        client.points.add(message.author.id, args[0] - client.points.getPoints(message.author.id));
         let s="s"
         if (args[0]==1)
             s="";
